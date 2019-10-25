@@ -19,7 +19,7 @@ $(document).ready(function() {
       if(this.sante.pv > 0) {
         cible.sante.pv -= this.arme.degats;
         $(cible.sante.ID).html(cible.sante.pv);
-        if(cible.sante.pv = 0) {
+        if(cible.sante.pv <= 0) {
           alert('FIN');
         }
       }
@@ -28,7 +28,7 @@ $(document).ready(function() {
       if(this.sante.pv > 0) {
         this.sante.pv -= cible.arme.degats / 2;
         $(this.sante.ID).html(this.sante.pv);
-        if(this.sante.pv = 0) {
+        if(this.sante.pv <= 0) {
           alert('FIN');
         }
       }
@@ -116,9 +116,7 @@ $(document).ready(function() {
 // #################################
 // ### DEPLACEMENTS & COLLISIONS ###
 // #################################
-  let combat = false;
   let mouvement = 0;
-  let bouton = '';
   let quiCommence = 0;
 
   const bordsHaut = [0,1,2,3,4,5,6,7,8,9];
@@ -126,96 +124,150 @@ $(document).ready(function() {
   const bordsDroite = [9,19,29,39,49,59,69,79,89,99];
   const bordsGauche = [-1,10,20,30,40,50,60,70,80,90];
 
+  // JOUEUR qui JOUE le PREMIER
   quiCommence = Math.floor(Math.random() * 2);
   if(quiCommence < 1) {
-    bouton = $('#boutonJoueur1');
     $('#tourJoueur1').text('MON TOUR').css('color','green');
     $('#tourJoueur2').text('EN ATTENTE').css('color','red');
     iJoueur = iJoueur1;
     imgJoueur = 'img#joueur1';
   } else {
-    bouton = $('#boutonJoueur2');
     $('#tourJoueur2').text('MON TOUR').css('color','green');
     $('#tourJoueur1').text('EN ATTENTE').css('color','red');
     iJoueur = iJoueur2;
     imgJoueur = 'img#joueur2';
   }
+  seDeplacer(); // ACTIVE FONCTION DEPLACEMENTS
 
-  //programme();
-
-//function programme() {
-while(mouvement < 3) {
+  // VERIFIE COLLISIONS MURS et PLATEAU
   function estDifferent(element) {
     return element !== iJoueur;
   }
 
-  console.log(iJoueur); // TEST
-  console.log(mouvement); // TEST
-
-  $(document).keydown(function(e) {
-    if(mouvement < 3) {
-      if(bordsDroite.every(estDifferent) && !$((divs)[iJoueur+1]).hasClass('mur')) {
-        // Touche clavier DROITE
-        if (e.which === 39) {
-          iJoueur++;
-          $(imgJoueur).prependTo($((divs)[iJoueur]));
-          mouvement++;
-        }
+  // VERIFIE SI un JOUEUR a fait 3 MOUVEMENTS
+  // TOUR SUIVANT = L'AUTRE JOUEUR
+  function verifieMouvement() {
+    mouvement++;
+    if(mouvement >= 3) {
+      if(quiCommence < 1) {
+        $('#tourJoueur2').text('MON TOUR').css('color','green');
+        $('#tourJoueur1').text('EN ATTENTE').css('color','red');
+        iJoueur = iJoueur2;
+        imgJoueur = 'img#joueur2';
+        quiCommence++;
+      } else {
+        $('#tourJoueur1').text('MON TOUR').css('color','green');
+        $('#tourJoueur2').text('EN ATTENTE').css('color','red');
+        iJoueur = iJoueur1;
+        imgJoueur = 'img#joueur1';
+        quiCommence--;
       }
-      if(bordsGauche.every(estDifferent) && !$((divs)[iJoueur-1]).hasClass('mur')) {
-        // Touche clavier GAUCHE
-        if (e.which === 37) {
-          iJoueur--;
-          $(imgJoueur).prependTo($((divs)[iJoueur]));
-          mouvement++;
-        }
-      }
-      if(bordsBas.every(estDifferent) && !$((divs)[iJoueur+10]).hasClass('mur')) {
-        // Touche clavier BAS
-        if (e.which === 40) {
-          iJoueur = iJoueur + 10;
-          $(imgJoueur).prependTo($((divs)[iJoueur]));
-          mouvement++;
-        }
-      }
-      if(bordsHaut.every(estDifferent) && !$((divs)[iJoueur-10]).hasClass('mur')) {
-        // Touche clavier HAUT
-        if (e.which === 38) {
-          iJoueur = iJoueur - 10;
-          $(imgJoueur).prependTo($((divs)[iJoueur]));
-          mouvement++;
-        }
-      }
-    } else {
-      break;
+      mouvement = 0;
     }
-    console.log(iJoueur); // TEST
-    console.log(mouvement); // TEST
-  });
-}
-//}
+  }
 
+  // ENREGISTRE la NOUVELLE POSITION de chaque JOUEUR
+  function verifieJoueur() {
+    if(quiCommence < 1) {
+      iJoueur1 = iJoueur;
+    } else {
+      iJoueur2 = iJoueur;
+    }
+    verifieCombat();
+    console.log(iJoueur1);
+    console.log(iJoueur2);
+  }
+
+  // DEPLACEMENTS
+  function seDeplacer() {
+    $(document).keydown(function(e) {
+        if(bordsDroite.every(estDifferent) && !$((divs)[iJoueur+1]).hasClass('mur')) {
+          // Touche clavier DROITE
+          if (e.which === 39) {
+            iJoueur++;
+            $(imgJoueur).prependTo($((divs)[iJoueur]));
+            verifieJoueur();
+            verifieMouvement();
+          }
+        }
+        if(bordsGauche.every(estDifferent) && !$((divs)[iJoueur-1]).hasClass('mur')) {
+          // Touche clavier GAUCHE
+          if (e.which === 37) {
+            iJoueur--;
+            $(imgJoueur).prependTo($((divs)[iJoueur]));
+            verifieJoueur();
+            verifieMouvement();
+          }
+        }
+        if(bordsBas.every(estDifferent) && !$((divs)[iJoueur+10]).hasClass('mur')) {
+          // Touche clavier BAS
+          if (e.which === 40) {
+            iJoueur = iJoueur + 10;
+            $(imgJoueur).prependTo($((divs)[iJoueur]));
+            verifieJoueur();
+            verifieMouvement();
+          }
+        }
+        if(bordsHaut.every(estDifferent) && !$((divs)[iJoueur-10]).hasClass('mur')) {
+          // Touche clavier HAUT
+          if (e.which === 38) {
+            iJoueur = iJoueur - 10;
+            $(imgJoueur).prependTo($((divs)[iJoueur]));
+            verifieJoueur();
+            verifieMouvement();
+          }
+        }
+    });
+  }
+
+  // Si JOUEUR veut faire 0, 1 ou 2 MOUVEMENTS
+  // ANTI-REFRESH PAGE
   $('button').click(function(e){
     e.preventDefault();
+    mouvement = 3;
+    verifieJoueur();
+    verifieMouvement();
   })
-  $(bouton).click(function(e){
-    mouvement = 0;
-    //programme();
-  })
+
 
 // ##############
 // ### COMBAT ###
 // ##############
-//combat = true;
+let combatTour = 0;
+let monTour = '';
 
-if(combat === true) {
-  alert('COMBAT!');
-  if($('#choixJoueur1[value="attaque"]')) {
-    joueur1.attaquer(joueur2);
-  }
-  else {
-    joueur1.seDefendre(joueur2);
+function verifieCombat() {
+  if(iJoueur1 === iJoueur2) {
+    seCombattre();
   }
 }
+
+function seCombattre() {
+  alert('COMBAT!');
+
+  $('button').click(function(e){
+    verifieCombatTour();
+    monTour;
+  })
+}
+
+function verifieCombatTour() {
+    combatTour++;
+    if(combatTour >= 1) {
+      if(quiCommence < 1) {
+        monTour = joueur1.attaquer(joueur2);
+        $('#tourJoueur2').text('MON TOUR').css('color','green');
+        $('#tourJoueur1').text('EN ATTENTE').css('color','red');
+        quiCommence++;
+      } else {
+        monTour = joueur2.attaquer(joueur1);
+        $('#tourJoueur1').text('MON TOUR').css('color','green');
+        $('#tourJoueur2').text('EN ATTENTE').css('color','red');
+        quiCommence--;
+      }
+    combatTour = 0;
+  }
+};
+
 
 });

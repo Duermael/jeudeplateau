@@ -32,7 +32,12 @@ section {
 
 /* Bouton couleur et position */
 button {
-	margin-top: 25px !important;
+	border: solid grey 2px;
+	background-color: silver;
+	color: black !important;
+	font-weight: bold !important;
+	margin: 5px 0px 5px 20px !important;
+	width: 93.8%;
 }
 
 /* ### BORDURES DU PLATEAU ### */
