@@ -1,0 +1,18 @@
+Début
+CARTE
+    Générer le plateau 10x10
+    Générer des murs aléatoirement
+    Générer les armes et joueurs aléatoirement
+    Si il y a un mur
+	Supprimer ce mur
+DEBUT DU JEU
+    Tant que la vie d'un des deux joueurs > 0
+DEPLACEMENTS
+    Tant que Mouvement < 3
+        Si touche -> actionnée
+	    Joueur X avance de une case à droite
+            Mouvement++;
+        Si touche <- actionnée
+	    Joueur X avance de une case à gauche
+            Mouvement++;
+Fin

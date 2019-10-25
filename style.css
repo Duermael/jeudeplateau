@@ -1,0 +1,58 @@
+
+/* Hauteur-Largeur des cases et Bordure des cases */
+.row div {
+	height: 10%;
+	width: 9%;
+	border: solid silver 1px;
+	overflow: hidden;
+	padding-left: 3px;
+}
+
+/* Couleur des murs */
+.mur {
+	background: radial-gradient(black, grey);
+	border: solid black 1px !important;
+	border-radius: 10px;
+}
+
+/* Section Infos du jeu */
+section {
+	text-align: center;
+	background-color: silver;
+	border: solid grey 2px;
+	padding-top: 25px;
+	margin-top: 15px;
+	height: 95%;
+}
+
+/* Bouton couleur et position */
+button {
+	margin-top: 25px !important;
+}
+
+/* ### BORDURES DU PLATEAU ### */
+/* Bordure du plateau gauche */
+.row div:first-child {
+	border-left: solid grey 2px;
+	margin-left: 30px;
+}
+/* Bordure du plateau droite */
+.row div:last-child {
+	border-right: solid grey 2px;
+}
+/* Bordure du plateau haut */
+.first div {
+	border-top: solid grey 2px;
+}
+/* Bordure du plateau bas */
+.last div {
+	border-bottom: solid grey 2px;
+}
+
+/* ### TABLETTE ### */
+@media(max-height: 590px) {
+    /* Taille texte */
+    section {
+    	font-size: 0.8em;
+    }
+}

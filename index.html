@@ -1,0 +1,192 @@
+<!DOCTYPE>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Jeu de plateau</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/autres/icon.png">
+	<link href="style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<section class="col-sm-2">
+	<p>JOUEUR 1</p><br>
+	<p>-------------------------</p><br>
+	<p>VIE: 100</p><br>
+	<p>ARME: épee</p><br>
+    <p>DEGATS: 10</p><br>
+	<p>-------------------------</p><br>
+	<p>AU CHOIX</p><br>
+    <form>
+        <select name="choix">
+            <option value="attaque">position attaque</option>
+            <option value="defense">position défense</option>
+        </select>
+        <button name="button">valider</button>
+    </form><br>
+    <p>-------------------------</p><br>
+	<p>EN ATTENTE</p><br>
+</section>
+
+<div class="container col-sm-8">
+
+    <div class="row first">
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    </div>
+
+ 	<div class="row">
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    </div>
+
+  	<div class="row">
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    </div>
+
+    <div class="row last">
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    	<div class="col-sm-1"></div>
+    </div>
+
+</div>
+
+<section class="col-sm-2">
+    <p>JOUEUR 2</p><br>
+    <p>-------------------------</p><br>
+    <p>VIE: 100</p><br>
+    <p>ARME: épee</p><br>
+    <p>DEGATS: 10</p><br>
+    <p>-------------------------</p><br>
+    <p>AU CHOIX</p><br>
+    <form>
+        <select name="choix">
+            <option value="attaque">position attaque</option>
+            <option value="defense">position défense</option>
+        </select>
+        <button name="button">valider</button>
+    </form><br>
+    <p>-------------------------</p><br>
+    <p>MON TOUR</p><br>
+</section>
+
+<script type="text/javascript" src="carte.js"></script>
+
+</body>
+
+</html>
