@@ -2,7 +2,7 @@
 /* #### PLATEAU #### */
 /* ################# */
 
-/* Hauteur-Largeur des cases et Bordure des cases */
+/* Hauteur-Largeur des cases et Design des bordures des cases */
 .row div {
 	height: 9.44%;
 	width: 10%;
@@ -16,44 +16,43 @@
 	border: solid black 1px !important;
 	border-radius: 10px;
 }
-/* Bordures du plateau */
+/* Design des bordures du plateau */
 .row {
 	border: solid grey 1px;
 	margin-left: 20px !important;
 	margin-right: 20px !important;
 }
-/* Centre l'image de chaque arme */
+/* Centre l'image de chaque arme sur le plateau */
 .arme {
 	margin-top: 7;
 	margin-left: 15;
 }
-/* Ne le centre pas si elle se trouve dans l'ATH */
+/* Ne centre pas l'image des armes se trouvant dans l'ATH des Joueurs */
 section .arme {
 	margin-top: 5px;
 	margin-left: 0;
 	margin-bottom: -10px;
 }
-/* Texte en gras */
+/* Texte en gras sur toute la page */
 * {
 	font-weight: bold;
 }
 
-/* ############### */
-/* ##### ATH ##### */
-/* ############### */
+/* ########################### */
+/* ##### ATH DES JOUEURS ##### */
+/* ########################### */
 
-/* ############### */
-/* ##### BOX ##### */
-/* Section ATH Joueurs */
+/* ######################### */
+/* ##### DESIGN GLOBAL ##### */
+/* Design des ATH Joueurs <section> (taille, bordure) */
 section {
 	text-align: center;
-	background-color: silver;
 	border: solid grey 2px;
-	padding-top: 20px;
+	padding-top: 15px;
 	margin-top: 5px;
-	height: 94%;
+	height: 97%;
 }
-/* Traits design ATH Joueurs */
+/* Design des traits ------ présent dans l'ATH des Joueurs */
 section hr {
 	height: 2px;
 	background-color: #808080;
@@ -64,18 +63,18 @@ section hr {
 /* #################### */
 /* ##### LIFE BAR ##### */
 /* Progress Bar de Bootstrap */
-/* JOUEUR 1 */
+/* celle du JOUEUR 1 par défaut */
 section#joueur1 .progress-bar {
 	width: 100%;
 }
-/* JOUEUR 2 */
+/* celle du JOUEUR 2 par défaut */
 section#joueur2 .progress-bar {
     width: 100%;
 }
 
 /* ####################### */
 /* ##### MODE COMBAT ##### */
-/* Taille Boutons et Taille Images */
+/* Taille des Boutons et Taille de leur Image */
 section button {
 	width: 48.5%;
 	height: 15%;
@@ -83,26 +82,27 @@ section button {
 	background-size: cover;
 	border: solid white 1px;
 }
-/* Image Bouton Attaque */
+/* Image du Bouton Attaque */
 button.attaque {
 	background-image: url('images/autres/attaque.png');
 }
-/* Image Bouton Défense */
+/* Image du Bouton Défense */
 button.defense {
 	background-image: url('images/autres/defense.png');
 }
-/* Image CLICK quand survol l'un des deux boutons de combat */
+/* Image CLICK affichée quand on survole l'un des boutons du mode combat */
 button.attaque:hover, button.defense:hover {
 	background-image: url('images/autres/go.png');
 }
 
-/* ################# */
-/* ##### INFOS ##### */
-/* Couleur Texte Tour */
+/* #################### */
+/* ##### MON TOUR ##### */
+/* Taille du Texte de MON TOUR */
 .tour {
+	margin: 0px;
 	font-size: 1.5em;
 }
-/* Clignote quand c'est OUI */
+/* Texte de MON TOUR clignote quand c'est écrit OUI */
 .OUI {
 	animation: colorblink 3s infinite;
 }
@@ -111,55 +111,61 @@ button.attaque:hover, button.defense:hover {
 20% { color: lime; }
 }
 
-
-
-/* ################ */
-/* #### AUTRES #### */
-/* ################ */
-/* Taille & Couleur <div> Chrono Timer */
+/* ######################## */
+/* #### TIMER & BOUTON #### */
+/* ######################## */
+/* Taille & Couleur du <div> du Timer */
 div#finTour {
-	border: solid grey 2px;
-	border-right: 0px;
 	height: 4.34%;
-	width: 59.73%;
-	padding: 0px;
-	margin: 2.5px 0px 0px 203px !important;
-	background-color: silver;
+	padding: 0px 20px 0px 20px;
 	color: black !important;
+	margin: 2.5px 0px 0px 0px;
 	text-align: center;
 }
-/* Taille <p> Chrono Timer */
+/* Taille du <p> du Timer */
 div#finTour p {
+	background-color: silver;
+	border: solid grey 2px;
 	margin: 0px;
 }
-/* Espacement & Taille SPAN Chrono Timer */
+/* Espacement & Taille du SPAN contenant le Timer */
 div#finTour span {
 	font-size: 1.3em;
 	color: red;
 	padding-left: 5px;
 }
-/* Taille & Couleur Bouton Fin de Tour */
+/* Taille & Couleur du Bouton Fin de Tour */
 div#finTour button {
 	background-color: grey;
 	border: solid black 2px;
-	margin: -2.5px 0px 0px 0px !important;
+	padding-bottom: 4px;
 }
-/* Au survol Bouton Fin de Tour */
+/* Au survol Bouton Fin de Tour change de couleur de fond */
 div#finTour button:hover {
 	background-color: silver;
 	border: solid grey 2px;
 }
 
-
-
 /* ########################### */
 /* #### RESPONSIVE DESIGN #### */
 /* ########################### */
 
-/* TABLETTE */
+/* POUR TABLETTE */
+/* Taille d'écran de 0px à 595px */
 @media(max-height: 595px) {
-    /* Taille texte */
+    /* Taille du texte diminue */
     section {
     	font-size: 0.8em;
     }
 }
+/* POUR ORDI DE BUREAU */
+/* Taille d'écran de 800px à infini px */
+@media(min-height: 800px) {
+    /* Taille du texte grossit */
+    section {
+    	font-size: 1.2em;
+    }
+}
+/* POUR ORDI PORTABLE (le mien = 650px environ) */
+/* Taille d'écran de 595px à 800px */
+/* par défaut */
