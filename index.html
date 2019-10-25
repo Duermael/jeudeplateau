@@ -16,152 +16,26 @@
 <section class="col-sm-2">
 	<p>JOUEUR 1</p><br>
 	<p>-------------------------</p><br>
-	<p>VIE: 100</p><br>
+	<p>VIE: <span id="pvJoueur1">100</span></p><br>
 	<p>ARME: épee</p><br>
     <p>DEGATS: 10</p><br>
 	<p>-------------------------</p><br>
 	<p>AU CHOIX</p><br>
     <form>
-        <select name="choix">
-            <option value="attaque">position attaque</option>
+        <select id="choixJoueur1">
             <option value="defense">position défense</option>
+            <option value="attaque">position attaque</option>
         </select>
-        <button name="button">valider</button>
+        <button name="button"  id="boutonJoueur1">FIN TOUR</button>
     </form><br>
     <p>-------------------------</p><br>
-	<p>EN ATTENTE</p><br>
+	<p class="tour" id="tourJoueur1"></p><br>
 </section>
 
 <div class="container col-sm-8">
 
-    <div class="row first">
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    </div>
-
     <div class="row">
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    </div>
-
- 	<div class="row">
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    </div>
-
-  	<div class="row">
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    </div>
-
-    <div class="row">
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    </div>
-
-    <div class="row">
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    </div>
-
-    <div class="row last">
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
-    	<div class="col-sm-1"></div>
+    	<!-- <div class="col-sm-1" id="1"></div> -->
     </div>
 
 </div>
@@ -169,20 +43,20 @@
 <section class="col-sm-2">
     <p>JOUEUR 2</p><br>
     <p>-------------------------</p><br>
-    <p>VIE: 100</p><br>
+    <p>VIE: <span id="pvJoueur2">100</span></p><br>
     <p>ARME: épee</p><br>
     <p>DEGATS: 10</p><br>
     <p>-------------------------</p><br>
     <p>AU CHOIX</p><br>
     <form>
-        <select name="choix">
+        <select id="choixJoueur2">
             <option value="attaque">position attaque</option>
             <option value="defense">position défense</option>
         </select>
-        <button name="button">valider</button>
+        <button name="button" id="boutonJoueur2">FIN TOUR</button>
     </form><br>
     <p>-------------------------</p><br>
-    <p>MON TOUR</p><br>
+    <p class="tour" id="tourJoueur2"></p><br>
 </section>
 
 <script type="text/javascript" src="carte.js"></script>

@@ -2,10 +2,15 @@
 /* Hauteur-Largeur des cases et Bordure des cases */
 .row div {
 	height: 10%;
-	width: 9%;
+	width: 10%;
 	border: solid silver 1px;
 	overflow: hidden;
 	padding-left: 3px;
+}
+
+/* Texte Tour */
+.tour {
+	font-weight: bold;
 }
 
 /* Couleur des murs */
@@ -31,22 +36,10 @@ button {
 }
 
 /* ### BORDURES DU PLATEAU ### */
-/* Bordure du plateau gauche */
-.row div:first-child {
-	border-left: solid grey 2px;
-	margin-left: 30px;
-}
-/* Bordure du plateau droite */
-.row div:last-child {
-	border-right: solid grey 2px;
-}
-/* Bordure du plateau haut */
-.first div {
-	border-top: solid grey 2px;
-}
-/* Bordure du plateau bas */
-.last div {
-	border-bottom: solid grey 2px;
+.row {
+	border: solid grey 1px;
+	margin-left: 20px !important;
+	margin-right: 20px !important;
 }
 
 /* ### TABLETTE ### */
