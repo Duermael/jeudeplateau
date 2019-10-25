@@ -13,22 +13,30 @@
 
 <body>
 
-<section class="col-sm-2">
-	<p>JOUEUR 1</p><br>
-	<p>-------------------------</p><br>
-	<p>VIE: <span id="pvJoueur1">100</span></p><br>
-	<p>ARME: épee</p><br>
-    <p>DEGATS: 10</p><br>
-	<p>-------------------------</p><br>
-	<p>AU CHOIX</p><br>
-    <form>
-        <select id="choixJoueur1">
-            <option value="defense">défense</option>
-            <option value="attaque">attaque</option>
-        </select>
-    </form><br>
-    <p>-------------------------</p><br>
-	<p class="tour" id="tourJoueur1"></p><br>
+<section class="col-sm-2 " id="joueur1">
+	<p><img src="images/joueurs/joueur1/joueur1.png"></p>
+    <hr>
+    <!-- BARRE DE VIE -->
+    <p>PV: 100</p>
+	<div class="progress">
+        <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar"
+        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%"></div>
+    </div>
+    <hr>
+    <!-- ARME EQUIPEE -->
+	<p id="joueur1"></p><br>
+    <p>DEGATS: <span id="joueur1Degats"></span></p>
+    <hr>
+    <!-- TOGGLE DEFENSE / ATTAQUE -->
+    <p id="modeCombat">MODE COMBAT</p>
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label><br>
+    <hr>
+    <!-- MON TOUR ? -->
+    <p>MON TOUR</p>
+	<p class="tour" id="joueur1Tour"></p><br>
 </section>
 
 <div class="container col-sm-8">
@@ -39,26 +47,34 @@
 
 </div>
 
-<section class="col-sm-2">
-    <p>JOUEUR 2</p><br>
-    <p>-------------------------</p><br>
-    <p>VIE: <span id="pvJoueur2">100</span></p><br>
-    <p>ARME: épee</p><br>
-    <p>DEGATS: 10</p><br>
-    <p>-------------------------</p><br>
-    <p>AU CHOIX</p><br>
-    <form>
-        <select id="choixJoueur2">
-            <option value="attaque">attaque</option>
-            <option value="defense">défense</option>
-        </select>
-    </form><br>
-    <p>-------------------------</p><br>
-    <p class="tour" id="tourJoueur2"></p><br>
+<section class="col-sm-2" id="joueur2">
+    <p><img src="images/joueurs/joueur2/joueur2.png"></p>
+    <hr>
+    <!-- BARRE DE VIE -->
+    <p>PV: 100</p>
+    <div class="progress">
+        <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar"
+        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%"></div>
+    </div>
+    <hr>
+    <!-- ARME EQUIPEE -->
+    <p id="joueur2"></p><br>
+    <p>DEGATS: <span id="joueur2Degats"></span></p>
+    <hr>
+    <!-- TOGGLE DEFENSE / ATTAQUE -->
+    <p id="modeCombat">MODE COMBAT</p>
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label><br>
+    <hr>
+    <!-- MON TOUR ? -->
+    <p>MON TOUR</p>
+    <p class="tour" id="joueur2Tour"></p><br>
 </section>
 
 <div class="col-sm-8 col-sm-offset-2">
-    <button name="button">FIN TOUR</button>
+    <button name="button">METTRE FIN A MON TOUR</button>
 </div>
 
 <script type="text/javascript" src="carte.js"></script>

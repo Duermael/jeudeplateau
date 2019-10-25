@@ -1,54 +1,164 @@
+/* ################# */
+/* #### PLATEAU #### */
+/* ################# */
 
 /* Hauteur-Largeur des cases et Bordure des cases */
 .row div {
-	height: 10%;
+	height: 9.44%;
 	width: 10%;
 	border: solid silver 1px;
 	overflow: hidden;
 	padding-left: 3px;
 }
-
-/* Texte Tour */
-.tour {
-	font-weight: bold;
-}
-
 /* Couleur des murs */
 .mur {
 	background: radial-gradient(black, grey);
 	border: solid black 1px !important;
 	border-radius: 10px;
 }
+/* Bordures du plateau */
+.row {
+	border: solid grey 1px;
+	margin-left: 20px !important;
+	margin-right: 20px !important;
+}
+/* Texte en gras */
+* {
+	font-weight: bold;
+}
 
-/* Section Infos du jeu */
+/* ############### */
+/* ##### ATH ##### */
+/* ############### */
+
+/* ############### */
+/* ##### BOX ##### */
+/* Section ATH Joueurs */
 section {
 	text-align: center;
 	background-color: silver;
 	border: solid grey 2px;
-	padding-top: 25px;
-	margin-top: 15px;
-	height: 95%;
+	padding-top: 20px;
+	margin-top: 5px;
+	height: 94%;
 }
+/* Traits design ATH Joueurs */
+section hr {
+	height: 2px;
+	background-color: #808080;
+	color: #808080;
+	border: none;
+}
+
+/* #################### */
+/* ##### LIFE BAR ##### */
+/* progress bar de bootstrap */
+
+/* ################## */
+/* ##### TOGGLE ##### */
+/* Toggle Texte */
+#modeCombat {
+	color: white;
+	background-color: #3c3948;
+	margin-bottom: 0px;
+}
+/* Switch Rectangulaire Box */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 14%;
+}
+/* Slider par défaut = défense */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #70d31f; /* Vert */
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+/* Slider Images */
+.slider:before, .slider:after {
+  position: absolute;
+  height: 100%;
+  width: 45%;
+  left: 0px;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+/* Image à gauche = défense */
+.slider:before {
+	content: url("images/autres/attaque.png");
+}
+/* Image à droite = attaque */
+.slider:after {
+	content: url("images/autres/defense.png");
+}
+/* Image attaque à droite = nouvelle couleur */
+input:checked + .slider {
+  background-color: #db6860; /* Rouge */
+}
+/* Image gauche défense cachée */
+input:checked + .slider:before {
+  -webkit-transform: translateX(68px);
+  -ms-transform: translateX(68px);
+  transform: translateX(68px);
+  z-index: 2;
+}
+/* Image droite attaque dévoilée */
+input:checked + .slider:after {
+  -webkit-transform: translateX(68px);
+  -ms-transform: translateX(68px);
+  transform: translateX(68px);
+  z-index: 1;
+}
+/* Bordure noir après avoir checked */
+input:focus + .slider {
+  box-shadow: 0 0 1px #000;
+}
+
+/* ################# */
+/* ##### INFOS ##### */
+/* Couleur Texte Tour */
+.tour {
+	font-size: 1.5em;
+}
+/* Clignote quand c'est OUI */
+.OUI {
+	animation: colorblink 3s infinite;
+}
+@keyframes colorblink { 
+0% { }
+20% { color: lime; }
+}
+
+
+
+/* ################ */
+/* #### AUTRES #### */
+/* ################ */
 
 /* Bouton couleur et position */
 button {
 	border: solid grey 2px;
 	background-color: silver;
 	color: black !important;
-	font-weight: bold !important;
-	margin: 5px 0px 5px 20px !important;
+	margin: 2.5px 0px 2.5px 20px !important;
 	width: 93.8%;
 }
 
-/* ### BORDURES DU PLATEAU ### */
-.row {
-	border: solid grey 1px;
-	margin-left: 20px !important;
-	margin-right: 20px !important;
-}
 
-/* ### TABLETTE ### */
-@media(max-height: 590px) {
+
+/* ########################### */
+/* #### RESPONSIVE DESIGN #### */
+/* ########################### */
+
+/* TABLETTE */
+@media(max-height: 595px) {
     /* Taille texte */
     section {
     	font-size: 0.8em;
