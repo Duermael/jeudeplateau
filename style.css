@@ -8,7 +8,7 @@
 	width: 10%;
 	border: solid silver 1px;
 	overflow: hidden;
-	padding-left: 3px;
+	padding-left: 0px;
 }
 /* Couleur des murs */
 .mur {
@@ -21,6 +21,17 @@
 	border: solid grey 1px;
 	margin-left: 20px !important;
 	margin-right: 20px !important;
+}
+/* Centre l'image de chaque arme */
+.arme {
+	margin-top: 7;
+	margin-left: 15;
+}
+/* Ne le centre pas si elle se trouve dans l'ATH */
+section .arme {
+	margin-top: 5px;
+	margin-left: 0;
+	margin-bottom: -10px;
 }
 /* Texte en gras */
 * {
@@ -52,73 +63,37 @@ section hr {
 
 /* #################### */
 /* ##### LIFE BAR ##### */
-/* progress bar de bootstrap */
+/* Progress Bar de Bootstrap */
+/* JOUEUR 1 */
+section#joueur1 .progress-bar {
+	width: 100%;
+}
+/* JOUEUR 2 */
+section#joueur2 .progress-bar {
+    width: 100%;
+}
 
-/* ################## */
-/* ##### TOGGLE ##### */
-/* Toggle Texte */
-#modeCombat {
-	color: white;
-	background-color: #3c3948;
-	margin-bottom: 0px;
+/* ####################### */
+/* ##### MODE COMBAT ##### */
+/* Taille Boutons et Taille Images */
+section button {
+	width: 48.5%;
+	height: 15%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border: solid white 1px;
 }
-/* Switch Rectangulaire Box */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  height: 14%;
+/* Image Bouton Attaque */
+button.attaque {
+	background-image: url('images/autres/attaque.png');
 }
-/* Slider par défaut = défense */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #70d31f; /* Vert */
-  -webkit-transition: .4s;
-  transition: .4s;
+/* Image Bouton Défense */
+button.defense {
+	background-image: url('images/autres/defense.png');
 }
-/* Slider Images */
-.slider:before, .slider:after {
-  position: absolute;
-  height: 100%;
-  width: 45%;
-  left: 0px;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-/* Image à gauche = défense */
-.slider:before {
-	content: url("images/autres/attaque.png");
-}
-/* Image à droite = attaque */
-.slider:after {
-	content: url("images/autres/defense.png");
-}
-/* Image attaque à droite = nouvelle couleur */
-input:checked + .slider {
-  background-color: #db6860; /* Rouge */
-}
-/* Image gauche défense cachée */
-input:checked + .slider:before {
-  -webkit-transform: translateX(68px);
-  -ms-transform: translateX(68px);
-  transform: translateX(68px);
-  z-index: 2;
-}
-/* Image droite attaque dévoilée */
-input:checked + .slider:after {
-  -webkit-transform: translateX(68px);
-  -ms-transform: translateX(68px);
-  transform: translateX(68px);
-  z-index: 1;
-}
-/* Bordure noir après avoir checked */
-input:focus + .slider {
-  box-shadow: 0 0 1px #000;
+/* Image CLICK quand survol l'un des deux boutons de combat */
+button.attaque:hover, button.defense:hover {
+	background-image: url('images/autres/go.png');
 }
 
 /* ################# */
@@ -141,14 +116,38 @@ input:focus + .slider {
 /* ################ */
 /* #### AUTRES #### */
 /* ################ */
-
-/* Bouton couleur et position */
-button {
+/* Taille & Couleur <div> Chrono Timer */
+div#finTour {
 	border: solid grey 2px;
+	border-right: 0px;
+	height: 4.34%;
+	width: 59.73%;
+	padding: 0px;
+	margin: 2.5px 0px 0px 203px !important;
 	background-color: silver;
 	color: black !important;
-	margin: 2.5px 0px 2.5px 20px !important;
-	width: 93.8%;
+	text-align: center;
+}
+/* Taille <p> Chrono Timer */
+div#finTour p {
+	margin: 0px;
+}
+/* Espacement & Taille SPAN Chrono Timer */
+div#finTour span {
+	font-size: 1.3em;
+	color: red;
+	padding-left: 5px;
+}
+/* Taille & Couleur Bouton Fin de Tour */
+div#finTour button {
+	background-color: grey;
+	border: solid black 2px;
+	margin: -2.5px 0px 0px 0px !important;
+}
+/* Au survol Bouton Fin de Tour */
+div#finTour button:hover {
+	background-color: silver;
+	border: solid grey 2px;
 }
 
 

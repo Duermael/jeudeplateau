@@ -15,24 +15,22 @@
 
 <section class="col-sm-2 " id="joueur1">
 	<p><img src="images/joueurs/joueur1/joueur1.png"></p>
-    <hr>
     <!-- BARRE DE VIE -->
-    <p>PV: 100</p>
+    <p>SANTE: <span id="sante">100</span></p>
 	<div class="progress">
         <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar"
-        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%"></div>
+        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <hr>
     <!-- ARME EQUIPEE -->
+    <p>MON ARME</p>
 	<p id="joueur1"></p><br>
     <p>DEGATS: <span id="joueur1Degats"></span></p>
     <hr>
-    <!-- TOGGLE DEFENSE / ATTAQUE -->
-    <p id="modeCombat">MODE COMBAT</p>
-    <label class="switch">
-        <input type="checkbox">
-        <span class="slider"></span>
-    </label><br>
+    <!-- MODE COMBAT -->
+    <p>MODE COMBAT</p>
+    <button name="button" class="attaque"></button>
+    <button name="button" class="defense"></button>
     <hr>
     <!-- MON TOUR ? -->
     <p>MON TOUR</p>
@@ -49,32 +47,31 @@
 
 <section class="col-sm-2" id="joueur2">
     <p><img src="images/joueurs/joueur2/joueur2.png"></p>
-    <hr>
     <!-- BARRE DE VIE -->
-    <p>PV: 100</p>
+    <p>SANTE: <span id="sante">100</span></p>
     <div class="progress">
         <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar"
-        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%"></div>
+        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <hr>
     <!-- ARME EQUIPEE -->
+    <p>MON ARME</p>
     <p id="joueur2"></p><br>
     <p>DEGATS: <span id="joueur2Degats"></span></p>
     <hr>
-    <!-- TOGGLE DEFENSE / ATTAQUE -->
-    <p id="modeCombat">MODE COMBAT</p>
-    <label class="switch">
-        <input type="checkbox">
-        <span class="slider"></span>
-    </label><br>
+    <!-- MODE COMBAT -->
+    <p>MODE COMBAT</p>
+    <button name="button" class="attaque"></button>
+    <button name="button" class="defense"></button>
     <hr>
     <!-- MON TOUR ? -->
     <p>MON TOUR</p>
     <p class="tour" id="joueur2Tour"></p><br>
 </section>
 
-<div class="col-sm-8 col-sm-offset-2">
-    <button name="button">METTRE FIN A MON TOUR</button>
+<div class="col-sm-12" id="finTour">
+    <p class="col-sm-6">TEMPS RESTANT: <span id="compteur">280</span> secondes<p>
+    <button class="col-sm-6" name="button" id="finTour">METTRE FIN A MON TOUR</button>
 </div>
 
 <script type="text/javascript" src="carte.js"></script>

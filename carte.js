@@ -6,7 +6,7 @@ $(document).ready(function() {
       this.nom = nom;
       this.sante = 100;
       this.arme = arme;
-      this.combat = 'defense';
+      this.defense = 1;
       this.image = `img#${this.nom}`;
       this.position = 0;
       this.backgroundColor = backgroundColor;
@@ -17,27 +17,41 @@ $(document).ready(function() {
     creationATH() {
       $(`section#${this.nom}`).css('background-color',this.backgroundColor); // COULEUR FOND ATH
       $(`${this.arme.image}`).prependTo($(`p#${this.nom}`)); // IMAGE ARME EQUIPEE
-      $(`span#${this.nom}Degats`).text(`${this.arme.degats}`);
+      $(`span#${this.nom}Degats`).text(`${this.arme.degats}`); // DEGATS ARME EQUIPEE
     }
     passeSonTourAu(joueurActif) {
       $(`p.tour#${joueurActif.nom}Tour`).text('OUI').css('color','green').addClass('OUI');
       $(`p.tour#${this.nom}Tour`).text('NON').css('color','#ef0404').removeClass('OUI'); //rouge
     }
     attaquer(cible) {
-      if(this.sante > 0) {
-        cible.sante -= this.arme.degats;
-        //$(cible.sante).html(cible.sante);
-        if(cible.sante <= 0) {
-          alert('FIN');
-        }
+      // VERIFIER SI CIBLE SE DEFEND
+      if(cible.defense !== 2) {
+        combat = 1; // POUR BRUIT ARME
+        activerSon(); // BRUIT ARME
+        cible.defense = 1;
+      } else {
+        combat = 0; // POUR BRUIT BOUCLIER
+        activerSon(); // BRUIT BOUCLIER
+        $(`section#${cible.nom} button.defense`).css('border-width','1px'); // DEFENSE DESACTIVEE ATH
+        $(`section#${this.nom} button.defense`).css('border-width','1px'); // DEFENSE DESACTIVEE ATH
       }
-    }
-    seDefendre(cible) {
+      // SI ATTAQUANT EST EN VIE
       if(this.sante > 0) {
-        this.sante -= cible.arme.degats / 2;
-        //$(this.sante).html(this.sante);
-        if(this.sante <= 0) {
-          alert('FIN');
+        cible.sante -= this.arme.degats / cible.defense; // SELON DEGATS = SANTE DIMINUE
+        cible.defense = 1;
+        $(`section#${cible.nom} .progress-bar`).css('width',`${cible.sante}%`); // BARRE DE VIE
+        $(`section#${cible.nom} #sante`).text(cible.sante); // TEXTE SANTE
+        // SI CIBLE EST MORTE
+        if(cible.sante <= 0) {
+          activerSon('mort'); // BRUIT MORT
+          alert(`${cible.nom} a perdu ! Refresh la page pour une nouvelle partie !`);
+          cible.sante = 0; // PAS DE SANTE NEGATIF
+          $(`section#${cible.nom} #sante`).text(cible.sante); // TEXTE SANTE
+          compteurElt.textContent = compteur; // FIGE TIMER
+          clearInterval(intervalId); // FIN TIMER
+          tourJoueur1 = undefined; // FIN TOURS
+          $('div#finTour').html('<button name="button">PARTIE TERMINEE !</button>'); // FIN BOUTON
+          $('script').remove(); // FIN JEU
         }
       }
     }
@@ -49,10 +63,10 @@ $(document).ready(function() {
       this.nom = nom;
       this.degats = degats;
       this.image = `img#${this.nom}`;
-      this.position = 0;
+      this.position = undefined;
       }
       afficherArme() {
-        return `<img src="images/armes/${this.nom}.png" id="${this.nom}">`;
+        return `<img class="arme" src="images/armes/${this.nom}.png" id="${this.nom}">`;
       }
   };
 
@@ -62,6 +76,8 @@ $(document).ready(function() {
   const marteau = new Arme('marteau', 25);
   const epeeXL = new Arme('epeeXL', 20);
   const sabre = new Arme('sabre', 15);
+  // TABLEAU ARME
+  const armes = [epee1, epee2, marteau, epeeXL, sabre];
   // CREATION JOUEURS
   const joueur1 = new Joueur('joueur1', epee1, 'skyblue');
   const joueur2 = new Joueur('joueur2', epee2, 'burlywood');
@@ -117,10 +133,38 @@ $(document).ready(function() {
         $((damier)[i+this]).removeClass('mur');
       });
     }
+    // MIS A JOUR POSITION
+    else if(type === 'sabre') {
+      sabre.position = i;
+    }
+    // MIS A JOUR POSITION
+    else if(type === 'epeeXL') {
+      epeeXL.position = i;
+    }
     // SPAWN JOUEURS ARMES
     $(image).prependTo($((damier)[i]));
     $((damier)[i]).removeClass('mur');
   }
+
+  let compteurElt = document.getElementById("compteur");
+  let compteur = Number(compteurElt.textContent);
+
+// DIMINUE LE TIMER
+function diminuerCompteur() {
+    // ATH TIMER DIMINUE DE 1
+    compteur = Number(compteurElt.textContent);
+    if (compteur > 1) {
+        compteurElt.textContent = compteur - 1;
+    } else {
+      compteurElt.textContent = compteur - 1; // 0
+      clearInterval(intervalId); // FIN TIMER
+      alert('TEMPS ECOULE! Refresh la page pour une nouvelle partie!');
+      $('script').remove(); // FIN JEU
+    }
+}
+    // Diminue de 1 seconde le timer toutes les secondes
+    let intervalId = setInterval(diminuerCompteur, 1000); // 1000 millisecondes
+
 
   function genererJeu() {
   // Création Plateau
@@ -144,6 +188,10 @@ $(document).ready(function() {
     // Création ATH Joueurs
     joueur1.creationATH();
     joueur2.creationATH();
+    // BOUTONS ANTI-REFRESH PAGE
+    $('button').click(function(e){
+      e.preventDefault();
+    })
   }
 
   // GENERE LE JEU
@@ -163,18 +211,34 @@ $(document).ready(function() {
   const bordsBas = [90,91,92,93,94,95,96,97,98,99];
   const bordsDroite = [9,19,29,39,49,59,69,79,89,99];
   const bordsGauche = [-1,10,20,30,40,50,60,70,80,90];
+  // COLLISIONS JOUEUR
+  const casesAdjacentes = [10, -10, +1, -1];
 
   // SON FIN DE TOUR et SON MOUVEMENTS
-  function activerSon() {
+  function activerSon(bruit) {
     let audio;
+    // SONSMOUVEMENT et SON TOUR SUIVANT
     if(mouvement < 3) {
       const audio2 = new Audio('sons/bruitdePas.mp3');
       audio = audio2;
     } else if(mouvement >= 3) {
-      const audio1 = new Audio('sons/diiing.mp3');
+      const audio1 = new Audio('sons/bruitTourSuivant.mp3');
       audio = audio1;
     }
-    audio.play(); // PETIT SON
+    // SONS COMBAT
+    if(combat === 1) {
+      const audio3 = new Audio('sons/bruitCombat.mp3');
+      audio = audio3;
+    } else if(combat === 0) {
+      const audio4 = new Audio('sons/bruitDefense.mp3');
+      audio = audio4;
+    }
+    // SON MORT
+    if(bruit === 'mort') {
+      const audio5 = new Audio('sons/bruitMort.mp3');
+      audio = audio5;
+    }
+    audio.play(); // JOUE LE SON
   }
 
   // CHOISIS le JOUEUR qui JOUE le PREMIER TOUR
@@ -200,17 +264,20 @@ $(document).ready(function() {
     return element !== joueur.position;
   }
 
-  // Exemple: marteau
   // SI JOUEUR PASSE SUR ARME il LA RAMASSE et DEPOSE SON ANCIENNE ARME
-  function echangerArme() {
-    if(joueur.position === marteau.position) {
-      $(marteau.image).prependTo($(`p#${joueur.nom}`)); // ARME RAMASSEE ATH
-      $(joueur.arme.image).appendTo($((damier)[joueur.position])); // ARME DEPOSEE
-      joueur.arme = marteau; // ARME EQUIPEE
-      marteau.position = 0; // SUPPRESSION ANCIENNE POSITION ARME
-      $(`span#${joueur.nom}Degats`).text(`${marteau.degats}`); // DEGATS ARME EQUIPEE
-      $(joueur.image).remove(); // SUPPRESSION ANCIENNE IMAGE JOUEUR
-      $(joueur.afficherJoueur()).prependTo($((damier)[joueur.position])); // IMAGE JOUEUR ARME EQUIPEE 
+  function verifieSiEchangerArme() {
+    for(let i=0; i < armes.length; i++) {
+      if(joueur.position === armes[i].position) {
+        $(armes[i].image).prependTo($(`p#${joueur.nom}`)); // ARME RAMASSEE IMAGE ATH
+        $(joueur.arme.image).appendTo($((damier)[joueur.position])); // ARME DEPOSEE IMAGE
+        joueur.arme.position = armes[i].position; // POSITION ARME DEPOSEE
+        joueur.arme = armes[i]; // ARME EQUIPEE
+        armes[i].position = undefined; // SUPPRESSION ANCIENNE POSITION ARME
+        $(`span#${joueur.nom}Degats`).text(`${armes[i].degats}`); // DEGATS ARME EQUIPEE ATH
+        $(joueur.image).remove(); // SUPPRESSION ANCIENNE IMAGE JOUEUR
+        $(joueur.afficherJoueur()).prependTo($((damier)[joueur.position])); // IMAGE JOUEUR EQUIPEE
+        i = armes.length; // FIN DE LA VERIFICATION
+      }
     }
   }
 
@@ -238,18 +305,25 @@ $(document).ready(function() {
 
   // SI JOUEUR est sur une CASE ADJACENTE à l'AUTRE JOUEUR
   function verifieSiJoueurAdjacent() {
-    if(joueur1.position === joueur2.position-10 || joueur1.position === joueur2.position-1 || 
-      joueur1.position === joueur2.position+1 || joueur1.position === joueur2.position+10) {
-      $(document).off('keydown'); // DESACTIVE L'EVENT KEYDOWN
-      alert('COMBAT');
-      lancerCombat();
-    }
+    $(casesAdjacentes).each( function() {
+      if(joueur1.position === joueur2.position+this) {
+        $(document).off('keydown'); // DESACTIVE L'EVENT KEYDOWN
+        alert('COMBAT');
+        lancerCombat();
+      }
+    });
+  }
+
+  // A CHAQUE MOUVEMENT VERIFIE LES 3 FONCTIONS SUIVANTES
+  function pourChaqueMouvement() {
+    verifieSiEchangerArme();
+    compteMouvementgereTour();
+    verifieSiJoueurAdjacent();
   }
 
   // Si JOUEUR veut STOPPER son TOUR à 0, 1 ou 2 MOUVEMENTS
-  // BOUTON FIN DE TOUR ANTI-REFRESH PAGE
-  $('button').click(function(e){
-    e.preventDefault();
+  // BOUTON FIN DE TOUR pour MOUVEMENTS
+  $('button#finTour').click(function(e){
     mouvement = 3;
     activerSon();
     compteMouvementgereTour();
@@ -263,9 +337,7 @@ $(document).ready(function() {
           if (e.which === 39) {
             joueur.position++;
             $(joueur.image).prependTo($((damier)[joueur.position]));
-            echangerArme();
-            compteMouvementgereTour();
-            verifieSiJoueurAdjacent();
+            pourChaqueMouvement();
           }
         }
         if(bordsGauche.every(estDifferent) && !$((damier)[joueur.position-1]).hasClass('mur')) {
@@ -273,9 +345,7 @@ $(document).ready(function() {
           if (e.which === 37) {
             joueur.position--;
             $(joueur.image).prependTo($((damier)[joueur.position]));
-            echangerArme();
-            compteMouvementgereTour();
-            verifieSiJoueurAdjacent();
+            pourChaqueMouvement();
           }
         }
         if(bordsBas.every(estDifferent) && !$((damier)[joueur.position+10]).hasClass('mur')) {
@@ -283,9 +353,7 @@ $(document).ready(function() {
           if (e.which === 40) {
             joueur.position = joueur.position + 10;
             $(joueur.image).prependTo($((damier)[joueur.position]));
-            echangerArme();
-            compteMouvementgereTour();
-            verifieSiJoueurAdjacent();
+            pourChaqueMouvement();
           }
         }
         if(bordsHaut.every(estDifferent) && !$((damier)[joueur.position-10]).hasClass('mur')) {
@@ -293,9 +361,7 @@ $(document).ready(function() {
           if (e.which === 38) {
             joueur.position = joueur.position - 10;
             $(joueur.image).prependTo($((damier)[joueur.position]));
-            echangerArme();
-            compteMouvementgereTour();
-            verifieSiJoueurAdjacent();
+            pourChaqueMouvement();
           }
         }
     });
@@ -306,13 +372,65 @@ $(document).ready(function() {
 // ##############
 // ### COMBAT ###
 // ##############
+  let combat = undefined;
   // LANCE LE MODE COMBAT
   function lancerCombat() {
-    // SI JOUEUR CLIQUE SUR SLIDER = CHANGE POSITION DE COMBAT
-    $('.slider').click(function(){
-      alert('je change la valeur de joueur.combat');
-    });
+    combat = 1;
+    gereTourCombat();
+    // BOUTON FIN DE TOUR pour COMBAT
+    $('button #finTour').click(function(e){
+        activerSon();
+        gereTourCombat();
+    })
   }
 
+  function gereTourCombat() {
+    console.log(tourJoueur1);
+      // Si tourJoueur1 = 0 (inférieur à 1) ce N'est PLUS son tour!
+      if(tourJoueur1 < 1) {
+        joueur1.passeSonTourAu(joueur2);
+        AttaqueOuDefense();
+        tourJoueur1++;
+      // Si tourJoueur1 = 1 (supérieur à 1) c'est son tour!
+      } else {
+        joueur2.passeSonTourAu(joueur1);
+        AttaqueOuDefense();
+        tourJoueur1--;
+      }
+  }
+
+  // SELON le BOUTON CLIQUE PAR le JOUEUR ACTIF = ATTAQUE OU DEFENSE
+  function AttaqueOuDefense() {
+    // JOUEUR2
+    $('section#joueur2 button.attaque').click(function(e){
+      if(tourJoueur1 >= 1) {
+        joueur2.defense = 1; // SUPPRIME DEFENSE JOUEUR 2
+        joueur2.attaquer(joueur1); // JOUEUR 2 ATTAQUE
+        gereTourCombat(); // FIN TOUR
+      }
+    })
+    $('section#joueur2 button.defense').click(function(e){
+      if(tourJoueur1 >= 1) {
+        $("section#joueur2 button.defense").css('border-width','5px'); // DEFENSE ACTIVEE ATH JOUEUR 2
+        joueur2.defense = 2; // JOUEUR 2 SE DEFEND POUR LE PROCHAIN COUP
+        gereTourCombat(); // FIN TOUR
+      }
+    })
+    // JOUEUR 1
+    $('section#joueur1 button.attaque').click(function(e){
+      if(tourJoueur1 < 1) {
+        joueur1.defense = 1; // SUPPRIME DEFENSE JOUEUR 1
+        joueur1.attaquer(joueur2); // JOUEUR 1 ATTAQUE
+        gereTourCombat();
+      }
+    })
+    $('section#joueur1 button.defense').click(function(e){
+      if(tourJoueur1 < 1) {
+        $("section#joueur1 button.defense").css('border-width','5px'); // DEFENSE ACTIVEE ATH JOUEUR 1
+        joueur1.defense = 2; // JOUEUR 1 SE DEFEND POUR LE PROCHAIN COUP
+        gereTourCombat();
+      }
+    })
+  }
 
 });
