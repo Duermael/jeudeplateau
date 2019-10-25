@@ -19,35 +19,6 @@ function diminuerTimer() {
   }
 }
 
-/*
-// CLASSE TIMER
-class Timer {
-  constructor() {
-    // Prend la valeur du nombre écrit dans l'index HTML <span id="compteur">nombre</span>
-    this.compteurElt = document.getElementById("compteur");
-    this.compteur = Number(this.compteurElt.textContent); // Transforme ce "nombre" en Nombre
-    this.time = 1000; // 1000 millisecondes = 1 seconde
-    this.intervalId = setInterval('this.diminuerTimer()', 1000); // Diminue de 1 seconde le timer toutes les secondes
-  }
-
-  diminuerTimer() {
-    // DIMINUE DE 1 SECONDE LE TIMER A L'ECRAN GRÂCE A COMPTEUR
-    this.compteur = Number(this.compteurElt.textContent);
-    if(this.compteur >= 1) {
-      this.compteurElt.textContent = this.compteur - 1; // Affiche X secondes "en texte"
-    } else {
-      clearInterval(this.intervalId); // Désactive le timer pour le figer à 0 secondes
-      $(document).off('keydown'); // Désactive les touches du clavier
-      $('button').attr('disabled','disabled'); // Désactive les boutons
-      swal('TEMPS ÉCOULÉ!', 'Refresh la page pour une nouvelle partie!', 'warning');
-    }
-  }
-};
-// CREATION OBJET TIMER
-const timer = new Timer();
-// LANCEMENT DU TIMER
-timer.diminuerTimer();
-*/
 
 // JOUE TEL SON A TEL MOMENT
 function jouerSon(joueur) {

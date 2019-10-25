@@ -87,10 +87,43 @@
 </section>
 
 <!-- FICHIERS JAVASCRIPT -->
-<script type="text/javascript" src="js/jeu.js"></script> <!-- PLATEAU & ATH JOUEURS -->
+<script type="text/javascript" src="js/Jeu.js"></script> <!-- CLASS JEU -->
+<script type="text/javascript" src="js/Joueur.js"></script> <!-- CLASS JOUEUR -->
+<script type="text/javascript" src="js/Arme.js"></script> <!-- CLASS ARME -->
+<script type="text/javascript" src="js/Plateau.js"></script> <!-- CLASS PLATEAU -->
 <script type="text/javascript" src="js/bonus.js"></script> <!-- TIMER & SON -->
-<script type="text/javascript" src="js/deplacement.js"></script>
-<script type="text/javascript" src="js/combat.js"></script>
+<script type="text/javascript" src="js/deplacement.js"></script> <!-- FONCTIONS DEPLACEMENTS -->
+<script type="text/javascript" src="js/combat.js"></script> <!-- FONCTIONS COMBAT -->
+
+<!-- DONNEES PRINCIPALES DU JEU & LANCEMENT -->
+<script type="text/javascript">
+// CREATION OBJETS ARMES
+const epee1 = new Arme('epee1', 10, 0, 0, [0]);
+const epee2 = new Arme('epee2', 10, 0, 0, [0]);
+const marteau = new Arme('marteau', 25, 53, 56, [0, -1, -2, -3, -4, -5, -6, 1, 2, 3, 4, 5, 6]);
+const epeeXL = new Arme('epeeXL', 20, 10, 49, [0]);
+const sabre = new Arme('sabre', 15, 60, 89, [0]);
+// TABLEAU ARMES
+const armes = [epee1, epee2, marteau, epeeXL, sabre];
+// CREATION OBJETS JOUEURS
+const joueur1 = new Joueur('joueur1', 'JOUEUR 1', epee1, 'skyblue', 0, 9, [0, 10, 20, 30, 40, 1]);
+const joueur2 = new Joueur('joueur2', 'JOUEUR 2', epee2, 'burlywood', 89, 99, [0, -10, -20, -30, -40, -1]);
+// CREATION OBJET PLATEAU
+const plateau = new Plateau();
+// CREATION OBJET JEU
+const jeu = new Jeu();
+
+// VARIABLES DES JOUEURS (pour les Tours & Déplacements)
+let tourJoueur1 = 0; // Est-ce le tour du joueur1 ?
+let joueur; // Permet de gérer les 2 joueurs dans certaine fonctions
+// CONSTANTE du maximum de mouvement possible
+const MAXMOUVEMENT = 3;
+
+// INITIALISE LE JEU
+jeu.genererJeu();
+// ET ACTIVE LES TOUCHES CLAVIER
+jeu.activeEventListeningKeydown();
+</script>
 
 </body>
 
